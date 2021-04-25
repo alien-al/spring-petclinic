@@ -9,6 +9,7 @@ pipeline {
         stage('1-Build') {
             steps {
                 echo "Start of Stage Build..."
+                sh "./mvnw package"
                 echo "Building......."
                 echo "End of Stage Build..."
             }
