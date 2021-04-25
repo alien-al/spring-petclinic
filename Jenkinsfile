@@ -1,8 +1,9 @@
 pipeline {
     agent any
     environment {
-      PROJECT_NAME = "Neptun"
-      OWNER_NAME   = "Denis Astahov"
+      PROJECT_NAME = "Petclinic CI/CD"
+      OWNER_NAME   = "alien-al"
+      IMAGE = "alienal/petclinic"  
     }
 
     stages {
