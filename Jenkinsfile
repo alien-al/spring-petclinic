@@ -12,6 +12,7 @@ pipeline {
                 echo "Start of Stage Build..."
                 sh "./mvnw package"
                 echo "Building......."
+                sh "docker build -t ${env.IMAGE}:latest ."
                 echo "End of Stage Build..."
             }
         }
@@ -21,6 +22,7 @@ pipeline {
                 echo "Testing......."
                 echo "Hello ${PROJECT_NAME}"
                 echo "Owner is ${OWNER_NAME}"
+                sh "docker image ls petclinic --format={{.Size}}"
                 echo "End of Stage Build..."
             }
         }
