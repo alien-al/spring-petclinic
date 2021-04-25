@@ -10,7 +10,7 @@ pipeline {
         stage('1-Build') {
             steps {
                 echo "Start of Stage Build..."
-                sh "./mvnw package"
+                // sh "./mvnw package"
                 echo "Building......."
                 sh "docker build -t ${env.IMAGE}:latest ."
                 echo "End of Stage Build..."
