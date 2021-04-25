@@ -12,6 +12,7 @@ pipeline {
                 echo "Start of Stage Build..."
                 echo "My name is $USER"
                 // sh "./mvnw package"
+                sh "docker --version"
                 echo "Building......."
              //   sh "docker build -t ${env.IMAGE}:latest ."
                 echo "End of Stage Build..."
