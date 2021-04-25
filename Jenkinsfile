@@ -24,7 +24,7 @@ pipeline {
                 echo "Testing......."
                 echo "Hello ${PROJECT_NAME}"
                 echo "Owner is ${OWNER_NAME}"
-               // sh "docker image ls petclinic --format={{.Size}}"
+                sh "docker image ls ${env.IMAGE} --format={{.Size}}"
                 echo "End of Stage Build..."
             }
         }
