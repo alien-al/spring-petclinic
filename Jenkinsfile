@@ -18,6 +18,17 @@ pipeline {
                 echo "End of Stage Build..."
             }
         }
+        stage('Build Docker Image') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo '=== Building Petclinic Docker Image ==='
+                script {
+                    app = docker.build("${env.IMAGE}")
+                }
+            }
+        }
         stage('2-Test') {
             steps {
                 echo "Start of Stage Test..."
