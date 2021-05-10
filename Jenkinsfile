@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo '=== Building Petclinic Docker Image ==='
                 script {
-                    app = docker.build("${env.IMAGE}")
+                    dockerImage = docker.build("${env.IMAGE}")
                 }
             }
         }
@@ -36,7 +36,11 @@ pipeline {
                 echo "Hello ${PROJECT_NAME}"
                 echo "Owner is ${OWNER_NAME}"
                 sh "docker image ls ${env.IMAGE} --format={{.Size}}"
-                echo "End of Stage Build..."
+                script {
+                   GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
+                   SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
+                       }
+                echo "End of Stage Build...${SHORT_COMMIT}  "
             }
         }
         stage('Push Docker Image') {
@@ -48,9 +52,9 @@ pipeline {
                script {
                    //GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
                    //SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
-                   docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
-                       app.push("${env.BUILD_ID}")
-                       app.push("latest")
+                  // docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
+                   //    dockerImage.push("${env.BUILD_ID}")
+                    //   dockerImage.push("latest")
                     }
                 }
             }
