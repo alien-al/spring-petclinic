@@ -28,6 +28,22 @@ pipeline {
                 echo "End of Stage Build..."
             }
         }
+         stage('Push Docker Image') {
+            when {
+                branch 'master'
+            }
+            steps {
+                echo '=== Pushing Petclinic Docker Image ==='
+                script {
+                    GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
+                    SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
+                        app.push("$SHORT_COMMIT")
+                        app.push("latest")
+                    }
+                }
+            }
+        }
         stage('3-Deploy') {
             steps {
                 echo "Start of Stage Deploy..."
