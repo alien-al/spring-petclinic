@@ -49,14 +49,14 @@ pipeline {
            }
            steps {
                echo '=== Pushing Petclinic Docker Image ==='
-               script {
+            //   script {
                    //GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
                    //SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
                   // docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
                    //    dockerImage.push("${env.BUILD_ID}")
                     //   dockerImage.push("latest")
-                    }
-                }
+                 //   }
+              //  }
             }
         }
         stage('3-Deploy') {
